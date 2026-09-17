@@ -34,5 +34,15 @@ module.exports = {
       $: "jquery",
       jQuery: "jquery",
     }),
+    // Inject the PostHog config at build time so it stays configurable per environment
+    new Webpack.DefinePlugin({
+      "process.env.POSTHOG_KEY": JSON.stringify(
+        process.env.POSTHOG_KEY ||
+          "phc_zzBAvKba4vXesJkHQt98uqtURwAECUJAvxGnMEwoov7v"
+      ),
+      "process.env.POSTHOG_HOST": JSON.stringify(
+        process.env.POSTHOG_HOST || "https://eu.i.posthog.com"
+      ),
+    }),
   ],
 };
